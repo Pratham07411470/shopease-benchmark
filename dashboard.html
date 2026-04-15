@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - ShopEase</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+
+  <nav class="bg-slate-900 text-white sticky top-0 z-50 shadow-lg">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="index.html" class="text-2xl font-bold text-blue-400">ShopEase</a>
+      <div class="flex items-center gap-6 text-sm font-medium">
+        <a href="store.html" class="hover:text-blue-400 transition-colors">Shop</a>
+        <a href="contact.html" class="hover:text-blue-400 transition-colors">Contact</a>
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-sm font-bold">J</div>
+          <span class="text-sm">John D.</span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Toast -->
+  <div id="toast" class="hidden fixed top-6 right-6 z-50 px-5 py-3 rounded-xl text-white text-sm font-semibold shadow-xl bg-green-600"></div>
+
+  <div class="max-w-6xl mx-auto px-6 py-10">
+
+    <!-- Profile summary -->
+    <div class="bg-white rounded-2xl shadow p-6 mb-8 flex items-center gap-6">
+      <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center text-white text-2xl font-bold flex-shrink-0">J</div>
+      <div class="flex-1">
+        <h1 class="text-xl font-bold text-gray-900">John Doe</h1>
+        <p class="text-gray-500 text-sm">john.doe@example.com · Member since Jan 2023</p>
+      </div>
+      <button onclick="showToast('Profile editor coming soon!')"
+        class="border border-gray-200 text-gray-600 text-sm px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors">
+        Edit Profile
+      </button>
+    </div>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-3 gap-6 mb-8">
+      <div class="bg-white rounded-2xl shadow p-6 text-center">
+        <p class="text-3xl font-bold text-blue-600 mb-1">3</p>
+        <p class="text-gray-500 text-sm">Total Orders</p>
+      </div>
+      <div class="bg-white rounded-2xl shadow p-6 text-center">
+        <p class="text-3xl font-bold text-green-600 mb-1">$2,127</p>
+        <p class="text-gray-500 text-sm">Total Spent</p>
+      </div>
+      <div class="bg-white rounded-2xl shadow p-6 text-center">
+        <p class="text-3xl font-bold text-purple-600 mb-1">2</p>
+        <p class="text-gray-500 text-sm">Items in Wishlist</p>
+      </div>
+    </div>
+
+    <!-- Orders table -->
+    <div class="bg-white rounded-2xl shadow overflow-hidden">
+      <div class="flex items-center justify-between px-6 py-5 border-b border-gray-100">
+        <h2 class="text-lg font-bold text-gray-900">Recent Orders</h2>
+        <a href="store.html" class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+          Continue Shopping
+        </a>
+      </div>
+      <table class="w-full text-sm">
+        <thead class="bg-gray-50 text-gray-500 text-xs uppercase tracking-wide">
+          <tr>
+            <th class="px-6 py-3 text-left">Order #</th>
+            <th class="px-6 py-3 text-left">Product</th>
+            <th class="px-6 py-3 text-left">Date</th>
+            <th class="px-6 py-3 text-left">Status</th>
+            <th class="px-6 py-3 text-right">Total</th>
+            <th class="px-6 py-3 text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="orders-tbody" class="divide-y divide-gray-50">
+          <tr id="order-1001">
+            <td class="px-6 py-4 font-semibold text-gray-900">#1001</td>
+            <td class="px-6 py-4 text-gray-700">Laptop Pro (×1)</td>
+            <td class="px-6 py-4 text-gray-500">Mar 12, 2024</td>
+            <td class="px-6 py-4"><span class="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-medium">Delivered</span></td>
+            <td class="px-6 py-4 text-right font-semibold text-gray-900">$1,299</td>
+            <td class="px-6 py-4 text-right">
+              <button onclick="viewDetails('1001')" class="text-blue-600 hover:underline text-xs mr-3">View Details</button>
+              <button onclick="deleteOrder('1001')" class="text-red-500 hover:underline text-xs">Delete</button>
+            </td>
+          </tr>
+          <tr id="order-1002">
+            <td class="px-6 py-4 font-semibold text-gray-900">#1002</td>
+            <td class="px-6 py-4 text-gray-700">Wireless Headphones (×1)</td>
+            <td class="px-6 py-4 text-gray-500">Mar 18, 2024</td>
+            <td class="px-6 py-4"><span class="bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs font-medium">Shipped</span></td>
+            <td class="px-6 py-4 text-right font-semibold text-gray-900">$149</td>
+            <td class="px-6 py-4 text-right">
+              <button onclick="viewDetails('1002')" class="text-blue-600 hover:underline text-xs mr-3">View Details</button>
+              <button onclick="deleteOrder('1002')" class="text-red-500 hover:underline text-xs">Delete</button>
+            </td>
+          </tr>
+          <tr id="order-1003">
+            <td class="px-6 py-4 font-semibold text-gray-900">#1003</td>
+            <td class="px-6 py-4 text-gray-700">Mechanical Keyboard (×2)</td>
+            <td class="px-6 py-4 text-gray-500">Apr 2, 2024</td>
+            <td class="px-6 py-4"><span class="bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full text-xs font-medium">Processing</span></td>
+            <td class="px-6 py-4 text-right font-semibold text-gray-900">$158</td>
+            <td class="px-6 py-4 text-right">
+              <button onclick="viewDetails('1003')" class="text-blue-600 hover:underline text-xs mr-3">View Details</button>
+              <button onclick="deleteOrder('1003')" class="text-red-500 hover:underline text-xs">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer class="bg-slate-900 text-slate-400 text-sm py-6 px-6 text-center mt-8">
+    © 2018 ShopEase. All rights reserved.
+  </footer>
+
+  <script>
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.remove('hidden');
+      setTimeout(() => t.classList.add('hidden'), 3000);
+    }
+
+    function viewDetails(id) {
+      showToast(`Order #${id} details coming soon.`);
+    }
+
+    // BUG-003: Delete shows success toast but does NOT remove the row
+    function deleteOrder(id) {
+      // CORRECT behavior:
+      // const row = document.getElementById('order-' + id);
+      // if (row) row.remove();
+      // showToast('Order deleted successfully.');
+
+      // BUGGY: show success toast without actually removing the row
+      showToast('Order deleted successfully.');
+      // Row intentionally NOT removed
+    }
+  </script>
+</body>
+</html>

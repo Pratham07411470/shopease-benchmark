@@ -1,0 +1,280 @@
+{
+  "meta": {
+    "site_name": "ShopEase Benchmark",
+    "version": "1.0.0",
+    "description": "Controlled benchmark site for autonomous tester validation. Contains 10 planted bugs across 7 pages. Use check_results.py to compute tester accuracy.",
+    "total_bugs": 10,
+    "url": "https://pratham07411470.github.io/autonomous_tester/",
+    "url_netloc": "pratham07411470.github.io",
+    "pages": ["index.html", "login.html", "dashboard.html", "store.html", "product.html", "contact.html", "about.html", "team.html"]
+  },
+
+  "bugs": [
+    {
+      "id": "BUG-001",
+      "page": "login.html",
+      "severity": "high",
+      "category": "validation",
+      "title": "Empty email bypasses login validation",
+      "description": "Submitting the login form with an empty email field should show a validation error. Instead, the login succeeds.",
+      "trigger": {
+        "element": "Login button",
+        "precondition": "email field is empty, password field has any value"
+      },
+      "expected_outcome": "Error message 'Email is required' is visible. User is NOT logged in.",
+      "buggy_outcome": "Login succeeds. Page shows 'Welcome back!' message.",
+      "detection_keywords": ["email is required", "validation", "empty email"]
+    },
+    {
+      "id": "BUG-002",
+      "page": "login.html",
+      "severity": "medium",
+      "category": "error_message",
+      "title": "Wrong error message on invalid password",
+      "description": "When a user enters a valid email but wrong password, the error message should say 'Invalid email or password'. Instead it shows 'Server Error 500'.",
+      "trigger": {
+        "element": "Login button",
+        "precondition": "email='user@test.com', password='wrongpassword'"
+      },
+      "expected_outcome": "Error message 'Invalid email or password' is visible.",
+      "buggy_outcome": "Error message 'Server Error 500' is visible. This exposes internal server details.",
+      "detection_keywords": ["server error", "500", "wrong error message"]
+    },
+    {
+      "id": "BUG-003",
+      "page": "dashboard.html",
+      "severity": "high",
+      "category": "functionality",
+      "title": "Delete order button does not remove the order",
+      "description": "Clicking the Delete button on an order shows a success toast but the order row remains visible in the table.",
+      "trigger": {
+        "element": "Delete button (any order row)"
+      },
+      "expected_outcome": "Order row is removed from the table.",
+      "buggy_outcome": "Toast 'Order deleted successfully' appears but the order row remains in the table.",
+      "detection_keywords": ["delete", "not removed", "still visible", "order remains"]
+    },
+    {
+      "id": "BUG-004",
+      "page": "store.html",
+      "severity": "high",
+      "category": "search",
+      "title": "Search returns wrong results",
+      "description": "Searching for 'laptop' in the product search bar returns phone products instead of laptops.",
+      "trigger": {
+        "element": "Search bar",
+        "input": "laptop"
+      },
+      "expected_outcome": "Products with 'laptop' in the name are shown (Laptop Pro, Budget Laptop).",
+      "buggy_outcome": "Phone products are shown (iPhone 15, Android Phone). No laptop results.",
+      "detection_keywords": ["wrong results", "laptop", "search", "incorrect products"]
+    },
+    {
+      "id": "BUG-005",
+      "page": "store.html",
+      "severity": "medium",
+      "category": "sorting",
+      "title": "Price sort order is inverted",
+      "description": "Selecting 'Price: Low to High' in the sort dropdown shows products in descending price order (High to Low).",
+      "trigger": {
+        "element": "Sort dropdown",
+        "value": "Price: Low to High"
+      },
+      "expected_outcome": "Products shown from lowest price to highest price.",
+      "buggy_outcome": "Products shown from highest price to lowest price. Sort direction is inverted.",
+      "detection_keywords": ["sort", "inverted", "price", "wrong order", "descending"]
+    },
+    {
+      "id": "BUG-006",
+      "page": "product.html",
+      "severity": "medium",
+      "category": "feedback_message",
+      "title": "Add to Cart shows wrong success message",
+      "description": "Clicking 'Add to Cart' shows a toast message saying 'Added to Wishlist!' instead of 'Added to Cart!'",
+      "trigger": {
+        "element": "Add to Cart button"
+      },
+      "expected_outcome": "Toast message 'Added to Cart! \u2713' is visible.",
+      "buggy_outcome": "Toast message 'Added to Wishlist! \u2661' is visible. Wrong action confirmed.",
+      "detection_keywords": ["wishlist", "cart", "wrong message", "add to cart"]
+    },
+    {
+      "id": "BUG-007",
+      "page": "contact.html",
+      "severity": "high",
+      "category": "validation",
+      "title": "Contact form submits with empty required Name field",
+      "description": "The Name field is marked as required (*). Submitting the form with an empty Name field should show a validation error. Instead, it shows a success message.",
+      "trigger": {
+        "element": "Submit button",
+        "precondition": "Name field is empty, other required fields are filled"
+      },
+      "expected_outcome": "Error message 'Name is required' is visible. Form is NOT submitted.",
+      "buggy_outcome": "Success message 'Your message has been sent!' is visible. Form submits without Name.",
+      "detection_keywords": ["name is required", "validation", "required field", "empty name"]
+    },
+    {
+      "id": "BUG-008",
+      "page": "contact.html",
+      "severity": "medium",
+      "category": "validation",
+      "title": "Phone number field accepts non-numeric characters",
+      "description": "The phone number field should only accept digits. It currently accepts letters and special characters without any validation error.",
+      "trigger": {
+        "element": "Phone number input",
+        "input": "abcdef"
+      },
+      "expected_outcome": "Error message 'Phone must contain only numbers' or input is rejected.",
+      "buggy_outcome": "Letters are accepted in the phone field. No validation error shown.",
+      "detection_keywords": ["phone", "numeric", "letters accepted", "validation", "numbers only"]
+    },
+    {
+      "id": "BUG-009",
+      "page": "about.html",
+      "severity": "low",
+      "category": "content",
+      "title": "Inconsistent founding year across pages",
+      "description": "The About page states 'Founded in 2019' but the site footer on all pages says '\u00a9 2018 ShopEase'. These contradict each other.",
+      "trigger": {
+        "element": "About page content + footer"
+      },
+      "expected_outcome": "Founding year is consistent across the site.",
+      "buggy_outcome": "About page says 'Founded in 2019', footer says '\u00a9 2018'. Inconsistency.",
+      "detection_keywords": ["founded", "2019", "2018", "inconsistent", "copyright"]
+    },
+    {
+      "id": "BUG-010",
+      "page": "index.html (navigation)",
+      "severity": "medium",
+      "category": "navigation",
+      "title": "Meet the Team nav link navigates to wrong page",
+      "description": "In the About dropdown navigation, clicking 'Meet the Team' should navigate to team.html. Instead it navigates to contact.html.",
+      "trigger": {
+        "element": "About dropdown > Meet the Team"
+      },
+      "expected_outcome": "Navigation goes to team.html showing team member profiles.",
+      "buggy_outcome": "Navigation goes to contact.html (the Contact page). Wrong destination.",
+      "detection_keywords": ["meet the team", "wrong page", "contact", "team", "navigation"]
+    }
+  ],
+
+  "pages": [
+    {
+      "id": "home",
+      "file": "index.html",
+      "title": "ShopEase - Quality Products",
+      "reachable_from": ["direct"],
+      "interactive_elements": [
+        {"label": "Shop", "type": "dropdown", "items": ["All Products", "New Arrivals", "Deals"]},
+        {"label": "About", "type": "dropdown", "items": ["Our Story", "Meet the Team", "Careers"]},
+        {"label": "Contact", "type": "nav_link"},
+        {"label": "Login", "type": "nav_link"},
+        {"label": "Shop Now", "type": "button"},
+        {"label": "Laptop Pro", "type": "product_card"},
+        {"label": "Wireless Headphones", "type": "product_card"},
+        {"label": "Mechanical Keyboard", "type": "product_card"}
+      ],
+      "bugs_on_page": ["BUG-010"]
+    },
+    {
+      "id": "login",
+      "file": "login.html",
+      "title": "Login - ShopEase",
+      "reachable_from": ["direct", "nav: Login button"],
+      "interactive_elements": [
+        {"label": "Login tab", "type": "tab"},
+        {"label": "Register tab", "type": "tab"},
+        {"label": "Email", "type": "input"},
+        {"label": "Password", "type": "input"},
+        {"label": "Forgot password?", "type": "link"},
+        {"label": "Sign In", "type": "submit_button"},
+        {"label": "Don't have an account? Register", "type": "link"}
+      ],
+      "bugs_on_page": ["BUG-001", "BUG-002"]
+    },
+    {
+      "id": "dashboard",
+      "file": "dashboard.html",
+      "title": "Dashboard - ShopEase",
+      "reachable_from": ["login.html after successful login"],
+      "interactive_elements": [
+        {"label": "Delete (Order #1001)", "type": "button"},
+        {"label": "Delete (Order #1002)", "type": "button"},
+        {"label": "Delete (Order #1003)", "type": "button"},
+        {"label": "View Details", "type": "button"},
+        {"label": "Edit Profile", "type": "button"},
+        {"label": "Continue Shopping", "type": "button"}
+      ],
+      "bugs_on_page": ["BUG-003"]
+    },
+    {
+      "id": "store",
+      "file": "store.html",
+      "title": "Shop - ShopEase",
+      "reachable_from": ["direct", "nav: Shop > All Products"],
+      "interactive_elements": [
+        {"label": "Search bar", "type": "input"},
+        {"label": "Category", "type": "dropdown", "items": ["All", "Laptops", "Phones", "Accessories"]},
+        {"label": "Sort by", "type": "dropdown", "items": ["Default", "Price: Low to High", "Price: High to Low"]},
+        {"label": "Laptop Pro $1,299", "type": "product_card"},
+        {"label": "Budget Laptop $599", "type": "product_card"},
+        {"label": "iPhone 15 $999", "type": "product_card"},
+        {"label": "Android Phone $449", "type": "product_card"},
+        {"label": "Mechanical Keyboard $79", "type": "product_card"},
+        {"label": "Wireless Headphones $149", "type": "product_card"}
+      ],
+      "bugs_on_page": ["BUG-004", "BUG-005"]
+    },
+    {
+      "id": "product",
+      "file": "product.html",
+      "title": "Laptop Pro - ShopEase",
+      "reachable_from": ["store.html: clicking any product card"],
+      "interactive_elements": [
+        {"label": "Quantity -", "type": "button"},
+        {"label": "Quantity +", "type": "button"},
+        {"label": "Add to Cart", "type": "button"},
+        {"label": "Add to Wishlist", "type": "button"},
+        {"label": "Back to Store", "type": "link"}
+      ],
+      "bugs_on_page": ["BUG-006"]
+    },
+    {
+      "id": "contact",
+      "file": "contact.html",
+      "title": "Contact Us - ShopEase",
+      "reachable_from": ["direct", "nav: Contact"],
+      "interactive_elements": [
+        {"label": "Name *", "type": "input", "required": true},
+        {"label": "Email *", "type": "input", "required": true},
+        {"label": "Phone", "type": "input", "required": false},
+        {"label": "Subject", "type": "input"},
+        {"label": "Message *", "type": "textarea", "required": true},
+        {"label": "Send Message", "type": "submit_button"}
+      ],
+      "bugs_on_page": ["BUG-007", "BUG-008"]
+    },
+    {
+      "id": "about",
+      "file": "about.html",
+      "title": "About Us - ShopEase",
+      "reachable_from": ["nav: About > Our Story"],
+      "interactive_elements": [
+        {"label": "Meet Our Team", "type": "button"},
+        {"label": "View Open Positions", "type": "button"}
+      ],
+      "bugs_on_page": ["BUG-009"]
+    },
+    {
+      "id": "team",
+      "file": "team.html",
+      "title": "Our Team - ShopEase",
+      "reachable_from": ["about.html: Meet Our Team button"],
+      "note": "NOT reachable via nav About > Meet the Team due to BUG-010",
+      "interactive_elements": [
+        {"label": "View Open Positions", "type": "button"}
+      ],
+      "bugs_on_page": []
+    }
+  ]
+}
