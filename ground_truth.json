@@ -4,8 +4,8 @@
     "version": "1.0.0",
     "description": "Controlled benchmark site for autonomous tester validation. Contains 10 planted bugs across 7 pages. Use check_results.py to compute tester accuracy.",
     "total_bugs": 10,
-    "url": "https://pratham07411470.github.io/autonomous_tester/",
-    "url_netloc": "pratham07411470.github.io",
+    "url": "https://pratham07411470.github.io/shopease-benchmark/",
+    "url_netloc": "pratham07411470.github.io/shopease-benchmark",
     "pages": ["index.html", "login.html", "dashboard.html", "store.html", "product.html", "contact.html", "about.html", "team.html"]
   },
 
