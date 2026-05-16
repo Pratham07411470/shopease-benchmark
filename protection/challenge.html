@@ -8,14 +8,14 @@
 </head>
 <body class="min-h-screen bg-slate-950 text-slate-100 flex items-center justify-center px-6">
   <main class="max-w-xl w-full border border-slate-700 bg-slate-900 rounded-2xl p-8 shadow-2xl">
-    <div class="text-xs uppercase tracking-[0.24em] text-blue-300 mb-3">ShopEase Security</div>
+    <div class="text-xs uppercase tracking-[0.24em] text-blue-300 mb-3">ShopEase Security &mdash; <span class="text-slate-400 normal-case tracking-normal">Simulated JS challenge</span></div>
     <h1 class="text-3xl font-bold mb-4">Checking your browser before accessing ShopEase</h1>
-    <p class="text-slate-300 mb-6">This page simulates a JavaScript challenge used by protected commerce sites. Automated testing should report this as access protection, not as a product bug.</p>
+    <p class="text-slate-300 mb-6">This page simulates a browser integrity check used by protected commerce sites. Automated testing should report this page as access protection and stop, not treat it as a product bug.</p>
     <div class="h-2 bg-slate-800 rounded-full overflow-hidden mb-6">
       <div id="bar" class="h-full bg-blue-400 w-0 transition-all duration-700"></div>
     </div>
     <button id="continue" disabled class="w-full rounded-xl bg-slate-700 text-slate-400 px-5 py-3 font-semibold">Verification in progress...</button>
-    <p class="text-xs text-slate-500 mt-5">Site owners can bypass this benchmark wall with <code>?tester_access=allow</code> or a server-side allowlist.</p>
+    <p class="text-xs text-slate-500 mt-5">Site owners can grant authorized tester access with <code>?tester_access=allow</code> or a server-side IP allowlist.</p>
   </main>
   <script>
     let pct = 0;

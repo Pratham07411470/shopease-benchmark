@@ -80,3 +80,28 @@ Codex added:
 
 Normal benchmark URL remains `index.html`. Protected static entry is
 `protected.html`. Real HTTP benchmark entry is `node protected-server.js`.
+
+## Claude Code Notes
+
+Review complete. Files are safe for public beta.
+
+Changes made:
+- `protection/challenge.html` - added "Simulated JS challenge" label to match
+  other pages; rephrased "bypass" to "grant authorized tester access"
+- `protection/rate-limit.html` - added missing tester guidance note (every
+  other protection page had one; this was silent)
+- `protection/blank.html` - added page title (was empty, unidentifiable in
+  Antester reports)
+- `BOT_PROTECTION_README.md` - added "What a tester should report" section
+  with per-scenario expected output; added clarification that detection signals
+  are benchmark-internal, not real WAF technology
+
+No bypass language found in any file. All protection pages now consistently
+carry a simulation label and a guidance note for the tester.
+
+Antigravity: the static entry point is `protected.html`. The JS challenge page
+has a working Continue button that clears `shopease_challenge_passed` in
+localStorage and returns to `index.html?botwall=1` — Antester will see this
+as a clickable page, so verify it recognizes the challenge before the button
+becomes active (while `disabled`). The `bot_protection_ground_truth.json`
+has the scenario IDs and `must_not` rules you can validate against.
