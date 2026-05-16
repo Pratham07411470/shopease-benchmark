@@ -97,7 +97,7 @@ http.createServer((req, res) => {
   }
 
   // Protection pages are informational — always serve them freely so that
-  // links like "How to allow authorized testing" don't loop back to a 403.
+  // help links don't loop back to a 403.
   if (url.pathname.startsWith("/protection/")) {
     return sendFile(res, url.pathname.replace(/^\/+/, ""));
   }
