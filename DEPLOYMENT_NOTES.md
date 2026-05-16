@@ -3,11 +3,11 @@
 ## Production URL
 
 ```
-https://shopease-protected.antester.com/
+https://antester.com/demo/shopease/
 ```
 
-DNS A record required: `shopease-protected.antester.com → 3.7.14.72`
-SSL: run `sudo certbot --nginx -d shopease-protected.antester.com` after DNS propagates.
+No new DNS record or SSL cert needed — served under the existing antester.com domain.
+Subdomain approach was dropped in favour of a path-based route.
 
 ## Server Architecture
 
@@ -109,8 +109,8 @@ All routes verified before nginx:
 | Demo | URL |
 |------|-----|
 | Buggy ecommerce | `https://pratham07411470.github.io/shopease-benchmark/` |
-| Protected ecommerce (static JS wall) | `https://shopease-protected.antester.com/protected.html` |
-| Protected ecommerce (owner-approved) | `https://shopease-protected.antester.com/?tester_access=allow` |
+| Protected ecommerce (blocked flow) | `https://antester.com/demo/shopease/protected.html` |
+| Protected ecommerce (owner-approved) | `https://antester.com/demo/shopease/?tester_access=allow` |
 
 ## Why This Demo Exists
 
