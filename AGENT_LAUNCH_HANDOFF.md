@@ -105,3 +105,32 @@ localStorage and returns to `index.html?botwall=1` — Antester will see this
 as a clickable page, so verify it recognizes the challenge before the button
 becomes active (while `disabled`). The `bot_protection_ground_truth.json`
 has the scenario IDs and `must_not` rules you can validate against.
+
+## Antigravity Notes
+
+Local real-HTTP wrapper verification and benchmark execution completed.
+
+- **Hosted URL**: `node protected-server.js` running locally on port 8080.
+- **Protected entry**: `http://localhost:8080/protected.html` intentionally returned `403`
+  because the real-HTTP wrapper blocks non-allowlisted traffic before serving files.
+- **Static hosting note**: on GitHub Pages or another static host, `protected.html`
+  should serve as `200` and then activate the JavaScript bot wall.
+
+**URL Status Verification**:
+- `/protected.html` -> 403
+- `/index.html?botwall=1&scenario=blocked` -> 403
+- `/index.html?botwall=1&scenario=captcha` -> 403
+- `/index.html?botwall=1&scenario=challenge` -> 403
+- `/index.html?botwall=1&scenario=ratelimit` -> 403
+- `/index.html?botwall=1&scenario=loginwall` -> 403
+- `/index.html?botwall=1&scenario=blank` -> 403
+- `/scenario/403` -> 403
+- `/scenario/429` -> 429
+- `/scenario/captcha` -> 403
+- `/scenario/challenge` -> 503
+- `/scenario/login` -> 401
+- `/scenario/blank` -> 403
+
+**Antester Execution**:
+- **Job ID**: `52933971-64b7-4837-9b28-2cb1d246d4cf`
+- **Result**: The report confirmed access protection or manual verification is required. No product bugs were filed, but findings pointed out WAF block messages and 429 rate limit responses, proving Antester recognized the protection.
