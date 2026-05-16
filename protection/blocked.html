@@ -24,20 +24,20 @@
     <p class="text-slate-600 text-lg mb-6">ShopEase is protecting this page from automated browsers. If you are testing this site for its owner, ask the site team to approve your tester session before running the scan again.</p>
     <div class="border border-blue-100 rounded-xl p-5 bg-blue-50 text-sm text-slate-700">
       <p><strong>For the site owner or QA team:</strong> approve the tester by IP allowlist, staging access, or a trusted test token. Then rerun the test from the same URL.</p>
-      <p class="mt-2 text-slate-500">A request reference is available in server logs if your security team needs to investigate.</p>
-    </div>
+      </div>
     <div class="mt-6 flex flex-wrap gap-3">
       <button
         type="button"
-        onclick="history.length > 1 ? history.back() : location.href='../index.html'"
+        onclick="location.href='../index.html?botwall=reset'"
         class="rounded-xl border border-slate-300 px-5 py-3 font-semibold text-slate-700 hover:bg-slate-50"
       >Go back</button>
       <button
         type="button"
-        onclick="location.reload()"
+        id="try-again-btn"
+        onclick="(function(b){b.textContent='Access still blocked';b.disabled=true;setTimeout(function(){b.textContent='Try again';b.disabled=false},3000)})(this);location.reload()"
         class="rounded-xl border border-slate-300 px-5 py-3 font-semibold text-slate-700 hover:bg-slate-50"
       >Try again</button>
-      <a href="allowlist.html" class="inline-block rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white hover:bg-blue-700">Authorized testing access guide</a>
+      <a href="allowlist.html" target="_blank" rel="noopener" class="inline-block rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white hover:bg-blue-700">Authorized testing access guide</a>
     </div>
   </main>
 </body>
