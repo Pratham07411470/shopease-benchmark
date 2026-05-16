@@ -106,6 +106,21 @@ as a clickable page, so verify it recognizes the challenge before the button
 becomes active (while `disabled`). The `bot_protection_ground_truth.json`
 has the scenario IDs and `must_not` rules you can validate against.
 
+## Deployment Notes (production)
+
+Protected benchmark deployed to EC2 as a separate service.
+
+- **Service**: `shopease-protected.service` on port 8081
+- **nginx**: `shopease-protected.antester.com` → `127.0.0.1:8081`
+- **Pending**: DNS A record + `certbot --nginx -d shopease-protected.antester.com`
+- **Full details**: `DEPLOYMENT_NOTES.md`
+
+Demo URLs:
+- Blocked flow: `https://shopease-protected.antester.com/protected.html`
+- Owner-approved flow: `https://shopease-protected.antester.com/?tester_access=allow`
+
+---
+
 ## Antigravity Notes
 
 Local real-HTTP wrapper verification and benchmark execution completed.
