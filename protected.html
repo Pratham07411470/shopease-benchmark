@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShopEase Protected Benchmark</title>
+  <script>
+    localStorage.setItem("shopease_botwall_enabled", "1");
+    localStorage.removeItem("shopease_trusted_tester");
+    localStorage.removeItem("shopease_challenge_passed");
+    localStorage.removeItem("shopease_recent_visits");
+    window.location.replace("index.html?botwall=1");
+  </script>
+</head>
+<body>
+  <p>Starting protected ShopEase benchmark...</p>
+</body>
+</html>

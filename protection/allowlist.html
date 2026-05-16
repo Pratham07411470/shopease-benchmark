@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Authorized testing access - ShopEase</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-blue-50 text-slate-900 flex items-center justify-center px-6">
+  <main class="max-w-2xl bg-white border border-blue-100 rounded-2xl p-8 shadow-xl">
+    <div class="text-sm uppercase tracking-widest font-bold text-blue-600 mb-3">Site owner action</div>
+    <h1 class="text-3xl font-bold mb-4">Allow authorized automated testing</h1>
+    <p class="text-slate-600 mb-5">This benchmark simulates what a protected site should tell a QA agent: testing is allowed only after the owner authorizes the tester.</p>
+    <ul class="list-disc pl-6 text-slate-700 space-y-2 mb-6">
+      <li>Allowlist the tester public IP in your WAF or firewall.</li>
+      <li>Use a staging bypass token or trusted test header.</li>
+      <li>Provide test credentials for authenticated areas.</li>
+      <li>Do not bypass third-party protections on sites you do not own.</li>
+    </ul>
+    <a href="../index.html?tester_access=allow&botwall=1" class="inline-block rounded-xl bg-blue-600 text-white px-5 py-3 font-semibold">Simulate owner-approved access</a>
+  </main>
+</body>
+</html>
