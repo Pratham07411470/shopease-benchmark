@@ -96,6 +96,12 @@ http.createServer((req, res) => {
     return scenario(req, res, url.pathname.split("/").pop());
   }
 
+  // Protection pages are informational — always serve them freely so that
+  // links like "How to allow authorized testing" don't loop back to a 403.
+  if (url.pathname.startsWith("/protection/")) {
+    return sendFile(res, url.pathname.replace(/^\/+/, ""));
+  }
+
   if (!isAllowed(req, url)) {
     if (rateLimited(ip)) return scenario(req, res, "429");
     return scenario(req, res, "403");
