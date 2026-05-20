@@ -19,7 +19,10 @@ const crypto = require("crypto");
 
 const ROOT = __dirname;
 const PORT = Number(process.env.PORT || 8080);
-const ALLOWLIST = new Set((process.env.ALLOWLIST_IPS || "").split(",").map(s => s.trim()).filter(Boolean));
+const ALLOWLIST = new Set([
+  "127.0.0.1", "::1",  // loopback — always allow same-server Playwright
+  ...(process.env.ALLOWLIST_IPS || "").split(",").map(s => s.trim()).filter(Boolean),
+]);
 const TEST_TOKEN = process.env.TEST_ACCESS_TOKEN || "shopease-owner-test";
 const RATE_WINDOW_MS = 30000;
 const RATE_LIMIT = 10;
