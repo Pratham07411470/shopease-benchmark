@@ -105,10 +105,8 @@ http.createServer((req, res) => {
     return sendFile(res, url.pathname.replace(/^\/+/, ""));
   }
 
-  if (!isAllowed(req, url)) {
-    if (rateLimited(ip)) return scenario(req, res, "429");
-    return scenario(req, res, "403");
-  }
+  // Auth gate disabled — site is publicly accessible.
+  // Use /scenario/<name> routes to demo specific protection responses.
 
   let rel = decodeURIComponent(url.pathname);
   if (rel === "/" || rel === "") rel = "/index.html";
